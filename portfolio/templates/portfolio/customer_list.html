@@ -1,0 +1,96 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+{% block content %}
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sigma Grindset Investments</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    </head>
+    <body>
+    <style>
+        table {
+    background-size: 3096px auto;
+    background-repeat: no-repeat;
+    background-image: url("https://sherwin.scene7.com/is/image/sw/color-swatch?_tparam_size=250,250&layer=comp&_tparam_color=C6CACA");
+}
+        body {
+
+            background-image:url("{% static "images/money.jpg" %}");
+
+            background-repeat:no-repeat;
+            background-size:100%;
+        }
+         center {
+            margin-left:50%;
+            margin-right:50%;
+
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md">
+                     <div class="thumbnail">
+        <div class="text-dark">
+            <div class="caption">
+                <div class="center">
+                    <h2 style="padding-inline: 150Px"><b>Customer Data</b></h2>
+                <div class="col-md-4">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+    </div>
+    <div>
+        <table>
+            <table class="table table-bordered">
+
+            <thead>
+            <tr class="bg-info">
+                <th>Customer Number</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Primary Email</th>
+                <th>Cell Phone</th>
+                <th colspan="3">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.cust_number }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.address }}</td>
+                    <td>{{ customer.city }}</td>
+                    <td>{{ customer.state }}</td>
+                    <td>{{ customer.zipcode }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.cell_phone }}</td>
+                    <td><a href="{% url 'portfolio:customer_edit' pk=customer.pk %}" class="btn btn-warning">Edit</a>
+                     <td><a href="{% url 'portfolio:customer_delete' pk=customer.pk %}"
+                           onclick="return confirm('Are you sure you want to delete?')"
+                           class="btn btn-danger">Delete</a>
+                    </td>
+
+                    <td><a href=""
+                           class="btn btn-primary">Portfolio</a>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    </body>
+    </html>
+{% endblock %}
