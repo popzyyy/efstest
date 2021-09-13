@@ -33,7 +33,7 @@ urlpatterns = [
     path('investment/create/', views.investment_new, name='investment_new'),
     path('stock/<int:pk>/delete/', views.stock_delete, name='stock_delete'),
     path('accounts/', include('django.contrib.auth.urls')),
-
+    path('customer/create/', views.customer_new, name='customer_new'),
     path('fund_list/', views.fund_list, name='fund_list'),
     path('fund/<int:pk>/edit/', views.fund_edit, name='fund_edit'),
     path('fund/<int:pk>/delete/', views.fund_delete, name='fund_delete'),
