@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-    <title>Sigma Grindset Investments</title>
+    <title>Eagle Financial Services</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -23,14 +23,14 @@
         /* Set gray background color and 100% height */
         .sidenav {
             padding-top: 20px;
-            background-color: indianred;
+            background-color: #f1f1f1;
             height: 100%;
         }
 
         /* Set black background color, white text and some padding */
         footer {
             background-color: #555;
-            color: black;
+            color: white;
             padding: 15px;
         }
 
@@ -45,25 +45,6 @@
                 height: auto;
             }
         }
-        center {
-            margin-left:50%;
-            margin-right:50%;
-            text-align: center;
-
-        }
-        span {
-              display: inline-block;
-              vertical-align: middle;
-              line-height: normal;
-            }
-
-        poop {
-              position: absolute;
-              left: -50px;
-              width: 20%;
-              height: 20%;
-              padding: 60px;
-            }
     </style>
 </head>
 <body id="app-layout">
@@ -82,22 +63,19 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="/">
-                Sigma Grindset Investments
+                Eagle Financial Services
             </a>
         </div>
-        <poop><img src="{% static "images/baby1.jpg" %}" alt="baby"/></poop>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li><a href="{% url 'portfolio:home' %}">Home</a></li>
                 <li><a href="{% url 'portfolio:customer_list' %}">Customers</a></li>
-               <li><a href="{% url 'portfolio:investment_list' %}">Investments</a></li>
-                <li><a href="{% url 'portfolio:stock_list' %}">Stocks</a></li>
-                <li><a href="{% url 'portfolio:fund_list' %}">Funds</a></li>
+               <li><a href="{% url 'portfolio:customer_list' %}">Investments</a></li>
+                <li><a href="{% url 'portfolio:customer_list' %}">Stocks</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    <p class="navbar-text"> Logged in as: {{ user.username }} </p>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <span class="caret"></span>
@@ -118,7 +96,6 @@
         <div class="col-md-8">
             {% block content %}
                 <div class="links">
-
                     <!-- Example row of columns -->
                     <div class="row">
                         <div class="col-md-3">
@@ -143,8 +120,8 @@
                                 <img src="{% static "images/nonstock.jpg" %}" alt="non-stock"/>
                                 <div class="caption">
                                     <h2>Non-Stock Investments</h2>
-                                    <p>Our team also provides advises for Non-Stock investments.</p>
-                                    <p><a class="btn btn-default" href="{% url 'portfolio:investment_list' %}"
+                                    <p>Our team also provides advice for Non-Stock investments.</p>
+                                    <p><a class="btn btn-default" href="{% url 'portfolio:customer_list' %}"
                                            role="button">View
                                         details &raquo;</a></p>
                                 </div>
@@ -152,44 +129,24 @@
                         </div>
                         <div class="col-md-3">
                             <div class="thumbnail">
-                                <img src="{% static "images/stonks.jpg" %}" alt="stocks"/>
+                                <img src="{% static "images/stocks.jpg" %}" alt="stocks"/>
+                                <div class="caption">
                                     <h2>Stock Portfolio</h2>
                                     <p>Our Stock portfolios vary across industries.</p>
-                                    <p><a class="btn btn-default" href="{% url 'portfolio:stock_list' %}" role="button">View
+                                    <p><a class="btn btn-default" href="{% url 'portfolio:customer_list' %}" role="button">View
                                         details &raquo;</a></p>
                                 </div>
                             </div>
                         </div>
 
-                        </div>
                     </div>
-
                 </div>
             {% endblock %}
         </div>
     </div>
-
-    </div>
 </body>
-<hr>
-    <div class="thumbnail">
-        <div class="text-dark">
-            <div class="caption">
-                <div class="col-md-4">
-                    <div class="center">
-                        <div class="aligned">
-
-                <h4><b>Help Center: Your Inquiry Solutions!</b></h4>
-            </div>
-        </div>
-    </div>
-
-
-                    <button type="button" class="btn btn-success" onclick="window.location.href='https://www.unomaha.edu/news/2019/05/need-technology-assistance-check-out-the-mavtech-help-center.php';">IT Help Center</button>
-                    <button type="button" class="btn btn-danger" onclick="window.location.href='https://www.unomaha.edu/academics/support/index.php';">Investor Support</button>
-                    <button type="button" class="btn btn-info" onclick="window.location.href='https://docs.google.com/document/d/1bjNKh-arVfbZQXpTiZuFFZB1ZvM4rabzcXszgjesUYc/edit?usp=sharing';">Legal Disclaimer</button>
-                    <button type="button" class="btn btn-warning" onclick="window.location.href='https://catalog.unomaha.edu/undergraduate/admissions/application-process/#:~:text=Apply%20for%20admission%20online%20at,Submit%20all%20required%20documentation.';">How to Apply</button>
-            </div>
-    </div>
- </div>
 </html>
+
+
+
+

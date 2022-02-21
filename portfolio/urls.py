@@ -1,15 +1,9 @@
-from django.conf.urls import url
-from . import views
-from django.urls import path
-from django.conf.urls import url
-from . import views
 from django.urls import path, re_path
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include
+from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
 from . import views
 from django.urls import path
 from django.contrib.auth import views as auth_views

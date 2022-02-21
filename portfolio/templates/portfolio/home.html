@@ -1,47 +1,53 @@
-{% extends "portfolio/base.html" %}
+{% extends 'portfolio/base.html' %}
 {% load static %}
 {% block content %}
-
-    <style>  body {
-
-            background-image:url("{% static "images/money.jpg" %}");
-
-            background-repeat:no-repeat;
-            background-size:100%;
-        }
-    </style>
             {% if user.is_authenticated %}
                 <div class="page-container">
 
-                     <div class="thumbnail">
-        <div class="text-dark">
-            <div class="caption">
-
-
-                    <h2 class="top-menu">Welcome to Our Money Making Machine {{ user.username }}</h2>
-                    <h3><b>Our Business Has Made Millions of Americans Filthy Rich!</b></h3>
-                    <p><b>Feel Free to Browse All of Our Successful Ventures. We Are Met with Immense Pleasure When You Get Rich.</b></p>
-
+                    <h2 class="top-menu">Hello {{ user.username }},</h2>
+                    <p>Please choose from below options.</p>
 
                 </div>
             {% endif %}
-
-
-              <div class="thumbnail">
-        <div class="text-dark">
-            <div class="caption">
-                <div class="center">
+            <div class="content container">
                 <div class="row">
-
+                    <div class="col-md-12">
                         <div class="links">
                             <!-- Example row of columns -->
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-3">
                                     <div class="thumbnail">
-                                        <img src="{% static "images/gold2.jpg" %}" alt="customer"/>
+                                        <img src="{% static "images/customer.jpg" %}" alt="customer"/>
                                         <div class="caption">
-                                            <h2>Our Customers</h2>
-                                            <p>This List is For the Top 1% Only. Get Ready to Become a Millionaire. Your Investment is Guaranteed. </p>
+                                            <h2>Customer</h2>
+                                            <p>We see our success in our customers success, it gives us an immense
+                                                pleasure when our
+                                                advises
+                                                turn out to be fruitful. </p>
+                                            <p><a class="btn btn-primary" href="{% url 'portfolio:customer_list' %}"
+                                                  role="button">View
+                                                details &raquo;</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+                                        <img src="{% static "images/nonstock.jpg" %}" alt="non-stock"/>
+                                        <div class="caption">
+                                            <h2>Non-Stock Investments</h2>
+                                            <p>Our team also provides advice for Non-Stock investments.</p>
+                                            <p><a class="btn btn-primary" href="{% url 'portfolio:customer_list' %}"
+                                                  role="button">View
+                                                details &raquo;</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+                                        <img src="{% static "images/stonks.jpg" %}" alt="stocks"/>
+                                        <div class="caption">
+                                            <h2>Stocks</h2>
+                                            <p>Our Stock portfolios vary across industries.</p>
                                             <p><a class="btn btn-primary" href="{% url 'portfolio:customer_list' %}"
                                                   role="button">View
                                                 details &raquo;</a></p>
@@ -49,46 +55,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-5">
-                                    <div class="thumbnail">
-                                        <img src="{% static "images/sleep5.png" %}" alt="non-stock"/>
-                                        <div class="caption">
-                                            <h2>Non-Stock Investments</h2>
-                                            <p>These Investments are Slower in Getting Rich, But Are Well Worth Your Time and Money. Contact Us Today.</p>
-                                            <p><a class="btn btn-primary" href="{% url 'portfolio:investment_list' %}"
-                                                  role="button">View
-                                                details &raquo;</a></p>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="thumbnail">
-                                        <img src="{% static "images/stonks.jpg" %}" alt="stocks"/>
-                                        <div class="caption">
-                                            <h2>Stocks</h2>
-                                            <p>Our Stock Portfolios Regularly Yield 400% on Average. Hustle with that sigma grindset!</p>
-                                            <p><a class="btn btn-primary" href="{% url 'portfolio:stock_list' %}"
-                                                  role="button">View
-                                                details &raquo;</a></p>
-                                        </div>
-                                </div>
-
-                                        </div>
-                                <div class="col-md-5">
-                                    <div class="thumbnail">
-                                        <img src="{% static "images/gold.jpg" %}" alt="non-stock"/>
-                                        <div class="caption">
-                                            <h2>Funds</h2>
-                                            <p>Our Funds are World-Class. We Provide Comprehensive Outlooks.</p>
-                                            <p><a class="btn btn-primary" href="{% url 'portfolio:fund_list' %}"
-                                                  role="button">View
-                                                details &raquo;</a></p>
-
-                                    </div>
-                                 </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
