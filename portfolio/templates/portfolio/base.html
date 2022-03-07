@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
     <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
@@ -72,7 +74,16 @@
                 <li><a href="{% url 'portfolio:customer_list' %}">Customers</a></li>
                <li><a href="{% url 'portfolio:investment_list' %}">Investments</a></li>
                 <li><a href="{% url 'portfolio:stock_list' %}">Stocks</a>
-                <li><a href="{% url 'portfolio:fund_list' %}">Funds</a></li>
+                <!--<li><a href="{url 'portfolio:fund_list' %}">Funds</a></li>-->
+                <li><a href="{% url 'portfolio:mutual_list' %}">Mutual Funds</a></li>
+                {% if request.user.is_superuser %}
+
+                {% else %}
+
+
+                {% endif %}
+
+
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -130,7 +141,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="thumbnail">
-                                <img src="{% static "images/stocks.jpg" %}" alt="stocks"/>
+                                <img src="{% static "images/stonks.jpg" %}" alt="stocks"/>
                                 <div class="caption">
                                     <h2>Stock Portfolio</h2>
                                     <p>Our Stock portfolios vary across industries.</p>

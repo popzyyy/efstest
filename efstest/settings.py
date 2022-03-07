@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'portfolio',
     'crispy_forms',
+    'rest_framework',
+    'mathfilters',
+    'django.contrib.humanize',
+    'django_nvd3',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +147,4 @@ EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'popzyyy0@gmail.com'
 EMAIL_HOST_PASSWORD = 'Poopoopeepee123'
+

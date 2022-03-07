@@ -1,5 +1,6 @@
 {% extends 'portfolio/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block content %}
     <html>
     <head>
@@ -35,7 +36,7 @@
         <div class="text-dark">
             <div class="caption">
                 <div class="center">
-                    <h2 style="padding-inline: 150Px"><b>Investment Data</b></h2>
+                    <h2 style="padding-inline: 150Px"><b>Mutual Fund Data</b></h2>
                 <div class="col-md-4">
 
 
@@ -54,45 +55,39 @@
 
             <thead>
             <tr class="bg-info">
-
                 <th>Customer</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Acquired Value</th>
-                <th>Acquired Date</th>
-                <th>Recent Value</th>
-                <th>Recent Date</th>
+                <th>Type</th>
+                <th>Shares</th>
+                <th>Purchase Date</th>
                 <th colspan="3">Actions</th>
             </tr>
             </thead>
             <tbody>
-            {% for investment in investments %}
+                {% for mutual in mutuals %}
                 <tr>
-                    <td>{{ investment.customer }}</td>
-                    <td>{{ investment.category }}</td>
-                    <td>{{ investment.description }}</td>
-                    <td>{{ investment.acquired_value }}</td>
-                    <td>{{ investment.acquired_date }}</td>
-                    <td>{{ investment.recent_value }}</td>
-                    <td>{{ investment.recent_date }}</td>
-                    <td><a href="{% url 'portfolio:investment_edit' pk=investment.pk %}"
+                    <td>{{ mutual.customer }}</td>
+                    <td>{{ mutual.name }}</td>
+                    <td>{{ mutual.shares }}</td>
+                    <td>{{ mutual.purchase_value|intcomma }}</td>
+
+
+                     <td><a href="{% url 'portfolio:mutual_edit' pk=mutual.pk %}"
                            class="btn btn-warning">Edit</a></td>
-                    <td><a href="{% url 'portfolio:investment_delete' pk=investment.pk %}"
+                    <td><a href="{% url 'portfolio:mutual_delete' pk=mutual.pk %}"
                            onclick="return confirm('Are you sure you want to delete?')"
                            class="btn btn-danger">Delete</a>
-                    </td>
+
+
+
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-     <div class="row">
-         <a href="{% url 'portfolio:investment_new' %}" class="row"><span
-                    class="btn btn-primary">Add Investment</span></a>
+                    <div class="row">
+                 <a href="{% url 'portfolio:mutual_new' %}" class="row"><span
+                    class="btn btn-primary">Add Mutual Fund</span></a>
      </div>
-
     </div>
     </body>
     </html>
-
-
 {% endblock %}

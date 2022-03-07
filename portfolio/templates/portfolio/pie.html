@@ -1,0 +1,30 @@
+{% extends 'portfolio/base.html' %}
+{% block content %}
+<h1>Your Portfolio Distribution</h1>
+ <div id="container" style="width: 140%;">
+    <canvas id="pie-chart"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script><script>
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#5DADE2', '#EC7063', '#A3E4D7', '#F9E79F', '#5c26ff', '#002db3', '#ffff26', '#4cff4c', '#ff00ff'
+          ],
+          label: 'Portfolio Distribution'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+  </script>
+{% endblock %}

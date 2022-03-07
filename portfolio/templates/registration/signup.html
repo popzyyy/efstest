@@ -1,0 +1,25 @@
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+    <div style="background-color: #2a2a2a2a; padding: 10px;">
+        <h1><b>Sign-up!</b></h1>
+    </div>
+       <div class="container">
+        <div class="row">
+
+
+    <div style="margin-bottom: 10px">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="w3-button w3-round w3-blue" type="submit">Register</button>
+
+    </form>
+
+
+
+    </div>
+
+    </div>
+
+{% endblock %}
