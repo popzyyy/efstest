@@ -57,7 +57,10 @@ urlpatterns = [
     path('pdf/<int:pk>/', views.pdf, name='pdf'),
     #path('export_pdf/', views.export_pdf, name='exportpdf'),
     path('email_pdf/<int:pk>', views.email_pdf, name='email_pdf'),
-    path('csv/', views.export_csv, name='export_csv'),
+    path('csv/<int:pk>/stocks', views.export_csv_stocks, name='export_csv_stocks'),
+    path('csv/<int:pk>/investments', views.export_csv_investments, name='export_csv_investments'),
+    path('csv/<int:pk>/mutuals', views.export_csv_mutuals, name='export_csv_mutuals'),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -14,9 +14,15 @@
             <body>
 
 <div class="row">
-    <h1 style="padding-left: 15Px">Customer Portfolio</h1>
+    <h1 style="padding-left: 15Px"><b>Customer Portfolio</b></h1>
 </div>
-<a href="{% url 'portfolio:pdf' %}" class="w3-button w3-round w3-black">Export</a>
+<a href="{% url 'portfolio:pdf' pk=customer.pk%}" class="w3-button w3-round w3-black">Export Portfolio PDF</a>
+<a href="{% url 'portfolio:email_pdf' pk=customer.pk%}" class="w3-button w3-round w3-black">Email and Export Portfolio PDF</a>
+<br><br>
+<a href="{% url 'portfolio:export_csv_stocks' pk=customer.pk%}" class="w3-button w3-round w3-black">Export CSV Stocks</a>
+<a href="{% url 'portfolio:export_csv_investments' pk=customer.pk%}" class="w3-button w3-round w3-black">Export CSV Investments</a>
+<a href="{% url 'portfolio:export_csv_mutuals' pk=customer.pk%}" class="w3-button w3-round w3-black">Export CSV Mutual Funds</a>
+
 <div class="row">
     <h2 style="padding-left: 15Px">Stocks Information</h2>
 </div>

@@ -89,10 +89,10 @@ def pdf(request,pk):
     convert_url = url + api_key + USD + CAD + currency_format
     currency_conversion = requests.get(convert_url).json()
 
-    CAD = currency_conversion["quotes"]["USDCAD"]
-    str_CAD = str(CAD)
-    convert = float(CAD) * float(total_portfolio)
+    CADtoUSD = currency_conversion["quotes"]["USDCAD"]
+    convert = float(CADtoUSD) * float(total_portfolio)
     str_convert = str(convert)
+
     data = [
         {"item": "Stocks", "amount": '$'+str_stock_result},
         {"item": "Investments", "amount": '$'+str_investment_result},
@@ -186,9 +186,8 @@ def email_pdf(request,pk):
     convert_url = url + api_key + USD + CAD + currency_format
     currency_conversion = requests.get(convert_url).json()
 
-    CAD = currency_conversion["quotes"]["USDCAD"]
-    str_CAD = str(CAD)
-    convert = float(CAD) * float(total_portfolio)
+    CADtoUSD = currency_conversion["quotes"]["USDCAD"]
+    convert = float(CADtoUSD) * float(total_portfolio)
     str_convert = str(convert)
     data = [
         {"item": "Stocks", "amount": '$'+str_stock_result},
@@ -240,62 +239,71 @@ def email_pdf(request,pk):
     email_msg.attach_file('portfolio.pdf')
     email_msg.send()
     context = {}
-    return render(request, 'portfolio/portfolio.html', context=context)
+    return FileResponse(open('portfolio.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
 
 @login_required
-def export_csv(request,pk):
+def export_csv_stocks(request,pk):
     customer = get_object_or_404(Customer, pk=pk)
     customers = Customer.objects.filter(created_date__lte=timezone.now())
     investments = Investment.objects.filter(customer=pk)
     stocks = Stock.objects.filter(customer=pk)
     mutuals = Mutual.objects.filter(customer=pk)
-    sum_recent_value = Investment.objects.filter(customer=pk).aggregate(Sum('recent_value'))
-    sum_acquired_value = Investment.objects.filter(customer=pk).aggregate(Sum('acquired_value'))
-
-    total_initial_investment = 0
-    total_current_investment = 0
-    sum_of_initial_stock_value = 0
-    sum_of_current_stock_value = 0
-
-    sum_of_initial_mutual_value = 0
-    sum_of_current_mutual_value = 0
-
-    for investment in investments:
-        total_initial_investment += investment.acquired_value
-        total_current_investment += investment.recent_value
-
-    for stock in stocks:
-        sum_of_initial_stock_value += stock.initial_stock_value()
-        sum_of_current_stock_value += stock.current_stock_value()
-    for mutual in mutuals:
-        sum_of_initial_mutual_value += mutual.initial_mutual_value()
-        sum_of_current_mutual_value += mutual.current_mutual_value()
-
-    investment_result = total_current_investment - total_initial_investment
-    stock_result = sum_of_current_stock_value - sum_of_initial_stock_value
-    mutual_result = sum_of_current_mutual_value - sum_of_initial_mutual_value
 
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="portfolio.csv"'
+    response['Content-Disposition'] = 'attachment; filename="stocks.csv"'
 
     writer = csv.writer(response)
-    stocks = Stock.objects.all()
-    mutuals = Mutual.objects.all()
-    investments = Investment.objects.all()
 
-    with open("Expired_Kits_In_Studies_Report.csv", "w"):
-            writer.writerow(stocks.objects.values('symbol'))
-            writer.writerow(stocks.objects.values('name'))
-            writer.writerow(stocks.objects.values('shares'))
-            writer.writerow(stocks.objects.values('purchase_price'))
+    with open("stocks.csv", "w"):
+            writer.writerow(Stock.objects.values_list('symbol'))
+            writer.writerow(Stock.objects.values('name'))
+            writer.writerow(Stock.objects.values('shares'))
+            writer.writerow(Stock.objects.values('purchase_price'))
+            writer.writerow(Stock.objects.values('current_price'))
 
-    return FileResponse(open('portfolio.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+    return response
+@login_required
+def export_csv_mutuals(request,pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    customers = Customer.objects.filter(created_date__lte=timezone.now())
+    investments = Investment.objects.filter(customer=pk)
+    stocks = Stock.objects.filter(customer=pk)
+    mutuals = Mutual.objects.filter(customer=pk)
 
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="mutual_funds.csv"'
 
+    writer = csv.writer(response)
+
+    with open("stocks.csv", "w"):
+        writer.writerow(Mutual.objects.values_list('name'))
+        writer.writerow(Mutual.objects.values('shares'))
+        writer.writerow(Mutual.objects.values('purchase_value'))
+        writer.writerow(Mutual.objects.values('present_value'))
+
+    return response
+@login_required
+def export_csv_investments(request,pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    customers = Customer.objects.filter(created_date__lte=timezone.now())
+    investments = Investment.objects.filter(customer=pk)
+    stocks = Stock.objects.filter(customer=pk)
+    mutuals = Mutual.objects.filter(customer=pk)
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="investments.csv"'
+
+    writer = csv.writer(response)
+
+    with open("stocks.csv", "w"):
+        writer.writerow(Investment.objects.values_list('category'))
+        writer.writerow(Investment.objects.values('description'))
+        writer.writerow(Investment.objects.values('acquired_value'))
+        writer.writerow(Investment.objects.values('recent_value'))
+
+    return response
 @login_required
 def portfolio(request, pk):
-              #stock_name):
-
     customer = get_object_or_404(Customer, pk=pk)
     customers = Customer.objects.filter(created_date__lte=timezone.now())
     investments = Investment.objects.filter(customer=pk)
@@ -360,6 +368,7 @@ def portfolio(request, pk):
 
 
     return render(request, 'portfolio/portfolio.html', {'customers': customers,
+                                                        'customer': customer,
                                                         'investments': investments,
                                                         'stocks': stocks,
                                                         'mutuals': mutuals,
